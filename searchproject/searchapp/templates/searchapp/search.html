@@ -25,10 +25,11 @@
         <input type="submit" value="Search"class="btn btn-primary"style="height:40px;margin-left:2px;width:100px;">
     </form>
     <hr>
-    
-    <h4>Search Results:</h4>
+    {% if items %}
+    <h4>Search results:</h4>
+   
     <ul class="list-group">
-        {% if items %}
+        
         <div class="row">
             {% for item in items %}
             <div class="col-12 col-md-6 col-lg-4 col-xl-3">
@@ -39,8 +40,19 @@
             {% endfor %}
         </div>
         {% else %}
-        <h4>Your dish is not found</h4>
+        {% if  not request.GET.query %}
+        <h4>Please search something in the search bar.</h4>
+        {% else %}
+        {% if not items %}
+        <h4>Your dish is not in our list. Can you check your dish again ?</h4>
+       {% endif %} 
         {% endif %}
+       
+       
+        
+        {% endif %}
+       
+       
     </ul>
     
        
@@ -59,6 +71,7 @@
         
         <br>
         <br>
+        <h3> Here are the restaurants that is related to your search.</h3>
         <h2>Restaurats</h2>
     <ul class="list-group">
         <div class="row">
